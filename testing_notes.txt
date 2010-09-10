@@ -1,0 +1,15 @@
+9/9/10 mei
+
+- user delete fails : returns 1 but the user is still there
+
+- update user does not return uuid WHEN updated uuid is the uuid just created.
+
+- resource update fails
+
+
+
+- resource_type index should return 'stats' and an array of 'resource_types', to match format of other index calls.
+
+9/10/10 mei
+
+- resource_retrieve[uuid] fails on all but the first resource, "Sample Resource"
