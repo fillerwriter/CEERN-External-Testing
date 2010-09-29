@@ -36,7 +36,7 @@ class CEERNUnitTesting extends UnitTestCase {
   function testUserCRUD() {
     $user = array(
       'first_name' => 'Brandon',
-      'last_name' => 'Morrison Test 2342',
+      'last_name' => 'Morrison Test 234aefasdf5',
       'bio' => 'I need a test user, stat.',
       'contact' => array(
         'mail' => 'brandontest@djcase.com',
@@ -52,8 +52,10 @@ class CEERNUnitTesting extends UnitTestCase {
     );
     
     $user = (object) $user;
-    $data = $this->CEERNResourceCall($this->ceen_location . '/user.php', 'POST', $user, TRUE, 'user_resource.create');
-    $this->assertTrue(isset($data->uuid));
+    /*$data = $this->CEERNResourceCall($this->ceen_location . '/user.php', 'POST', $user, TRUE, 'user_resource.create');
+    $this->assertTrue(isset($data->uuid));*/
+    
+    $privateInfo = $this->CEERNResourceCall($this->ceen_location . '/user/' . '27307e6a-bc40-11df-8932-4040e8acc39d' . '/private_info.php', 'GET', array(), TRUE, 'user_resource.private_info');
   }
   
   /**
@@ -94,7 +96,7 @@ class CEERNUnitTesting extends UnitTestCase {
     
     // set URL and other appropriate options
     curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -121,13 +123,16 @@ class CEERNUnitTesting extends UnitTestCase {
     }
     
     // grab URL and pass it to the browser
-    $return = unserialize(curl_exec($ch));
+    $return = curl_exec($ch);
+    
+    $header_info = curl_getinfo($ch);
     
     // close cURL resource, and free up system resources
     curl_close($ch);
     
     if ($output == TRUE) {
       print "Data Call - " . $url;
+      krumo($header_info);
       krumo($return);
     }
     

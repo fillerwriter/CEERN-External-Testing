@@ -6,15 +6,16 @@
 
 class CEERNResourceUtil {
 	
-  private $ceen_location = 'http://api.resourcecommons.org/services/rest';
-  private $public_key = 'a545766537012063cce4aafef3e137f2';
-  private $private_key = 'e4c746388aeceed2338474a56438bc7e';
+  private $ceen_location = 'http://localhost:8888/ceenapi/services/rest';
+  private $public_key = '9665857d322055b074a977fe44686d47';
+  private $private_key = '7352d97ef533d567e55c83f99b3c5cac';
 	
 	function __construct(){
         
     }	
 
 function CEERNResourceCall($url, $method = 'GET', $data = array(), $authenticate = FALSE, $resource_name = '', $output = TRUE) {
+  $url = $this->ceen_location . $url;
   $nonce = uniqid(mt_rand());
   $timestamp = time() + (60 * 60 * 4); // Time adjusted for differences. API server is currently GMT -1.
   
@@ -22,6 +23,11 @@ function CEERNResourceCall($url, $method = 'GET', $data = array(), $authenticate
   $hash = hash_hmac("sha256", implode(';', $hash_parameters), $this->private_key);
   
   $ch = curl_init();
+  
+  if ($output && $data) {
+    print "<br><b>Data Input</b>";
+    krumo($data);
+  }
   
   // if we're authenticating, we need to add info to the end of the query string. (i.e. - http://example.com/resource?test=1&[authinfo])
   if ($authenticate == TRUE) {
@@ -67,7 +73,7 @@ function CEERNResourceCall($url, $method = 'GET', $data = array(), $authenticate
   
   // grab URL and pass it to the browser
   $return = unserialize(curl_exec($ch));
-  
+  //$return = curl_exec($ch);
   // close cURL resource, and free up system resources
   curl_close($ch);
   

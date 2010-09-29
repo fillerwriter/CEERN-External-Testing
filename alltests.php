@@ -11,9 +11,9 @@ class AllTests extends TestSuite {
     function AllTests() {
         $this->TestSuite('All tests');
         $this->addFile('tests/test_users.php');
-        $this->addFile('tests/test_resources.php');
-		$this->addFile('tests/test_sources.php');
-		$this->addFile('tests/test_education.php');
+        //$this->addFile('tests/test_resources.php');
+		//$this->addFile('tests/test_sources.php');
+		//$this->addFile('tests/test_education.php');
     }
 }
 
