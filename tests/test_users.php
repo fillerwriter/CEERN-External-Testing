@@ -70,30 +70,31 @@ class CEERNUnitTestingUser extends UnitTestCase {
     $this->assertTrue(isset($data->name));
   }
 
-  function testUpdateUser() { 
-	// NOTE when UPDATE just-created user, uuid is not returned, but that user is updated!!  (spoils the assert below when this happens.)
-	$uuid = $this->temp_uuid;
-	 
-	$resource = array(
-	    'first_name' => 'Jerry',
-		'last_name' => 'Chameleon',
-	    'contact' => array(
-	      'mail' => 'changed@maryedith.com',
-	      'alternate_email' => 'chg2@example.com',
-	      'website' => 'http://examplechg.com',
-	      'street' => '1039 Washington St',
-	      'alternate' => 'Apartment 2',
-	      'city' => 'Franklin',
-	      'state' => 'AR',
-	      'zip' => '12345',
-	      'county' => 'United States',
-	    ),
-	    'bio' => 'A bio for the user',
-	  );
-	$resource = (object)$resource;
+  function testUpdateUser() {
+  	$uuid = $this->temp_uuid;
+  	 
+  	$resource = array(
+      'first_name' => 'Jerry',
+  		'last_name' => 'Chameleon',
+      'contact' => array(
+        'mail' => 'changed@maryedith.com',
+  	    'alternate_email' => 'chg2@example.com',
+  	    'website' => 'http://examplechg.com',
+        'street' => '1039 Washington St',
+  	    'alternate' => 'Apartment 2',
+        'city' => 'Franklin',
+        'state' => 'AR',
+        'zip' => '12345',
+        'county' => 'United States',
+      ),
+      'bio' => 'A bio for the user',
+    );
+  	
+  	$resource = (object)$resource;
 
     $data = $this->ceenRU->CEERNResourceCall('/user'.'/'.$uuid.'.php', 'PUT', $resource, TRUE, 'user_resource.update');
-    $this->assertTrue(isset($data->uuid));  // FAILS here when we updated the $temp_uuid
+    $this->assertTrue(isset($data->uuid));
+    $this->assertTrue($data->uuid == $uuid);
   }
 
   // this second GET is to view the UPDATED User.
@@ -105,8 +106,8 @@ class CEERNUnitTestingUser extends UnitTestCase {
   }
 
 
-  function testDeleteUser( $uuid='3c48ec46-aa94-11df-8932-4040e8acc39d') {  
-	$uuid = $this->temp_uuid;
+  function testDeleteUser() {  
+    $uuid = $this->temp_uuid;
 	
     $data = $this->ceenRU->CEERNResourceCall('/user'.'/'.$uuid.'.php', 'DELETE', NULL, TRUE, 'user_resource.delete');
     $this->assertTrue($data==1);
