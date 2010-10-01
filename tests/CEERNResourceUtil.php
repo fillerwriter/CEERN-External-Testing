@@ -19,7 +19,7 @@ class CEERNResourceUtil {
     $nonce = uniqid(mt_rand());
     $timestamp = time() + (60 * 60 * 4); // Time adjusted for differences. API server is currently GMT -1.
   
-    $hash_parameters = array($timestamp, $this->public_key, $nonce);
+    $hash_parameters = array($timestamp, $this->public_key, $nonce, $resource_name);
     $hash = hash_hmac("sha256", implode(';', $hash_parameters), $this->private_key);
   
     $ch = curl_init();
