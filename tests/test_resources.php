@@ -31,7 +31,7 @@ class CEERNUnitTesting extends UnitTestCase {
   }
   
   function __destruct() {
-    $this->ceenRU->CEERNResourceCall('/user'.'/'.$this->user_uuid.'.php', 'DELETE', NULL, TRUE, 'user_resource.delete', FALSE);
+    $this->ceenRU->CEERNResourceCall('/reset.php', 'POST', NULL, TRUE);
   }
 
   function setUp() {
