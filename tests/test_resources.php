@@ -98,7 +98,33 @@ class CEERNUnitTesting extends UnitTestCase {
   }
 
   /**
-   * 
+   * Tests index/search function for resources. In this function, we perform the following steps.
+   *
+   * - Create an internal list of x number of resources.
+   * - Create an internal count of different values to search for from index.
+   * - Add resources to index.
+   * - For each searchable field, ensure that we're getting the correct number of items from the database.
+   */
+   
+   /*  DESCRIPTION OF THE SEARCH/INDEXING FUNCTION FROM THE DOC:
+    * Title (title) - Name of resource.
+    * Language (language)- Language available for resource.
+    * Source (source) - UUID for source site.
+    * Resource Type (resource_type) - Resource Type.
+    	Classroom Resources, Places To Go, Online Resources
+    * Zip Code (zip) - Zip code search.
+    * State (state) - State search.
+    * Education Continuum (education_continuum) - Where on the education continuum does this fit?
+    * Education Standard (edu_standard) - A single education standard
+    * Update (update) - Filter out resources that were created or updated before this time. Useful to keep track of new posts.
+    
+    * Count (count) - # of items to display in a single query. Defaults to 20, maxes out at 100.
+    * Page (page) - What page # do we want to list?
+    */
+   
+  function testIndex() {
+  
+  }
 
   /**
    * Tests the accessibility of resource types.
