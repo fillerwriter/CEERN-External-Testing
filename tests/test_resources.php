@@ -158,8 +158,8 @@ class CEERNUnitTesting extends UnitTestCase {
   	  'title' => (isset($default_options['title'])) ? $default_options['title'] : $this->generateString(),
   	  'description' => (isset($default_options['description'])) ? $default_options['description'] : $this->generateString(50),
   	  'time' => array( // TODO: random time?
-  	    'start' => (isset($default_options['time']['start'])) ? $default_options['time']['start'] : date('m/d/y - h:i a', $random_timestamp),
-  		  'end' => (isset($default_options['time']['start'])) ? $default_options['time']['start'] : date('m/d/y - h:i a', $random_timestamp + 3600),
+  	    'start' => (isset($default_options['time']['start'])) ? $default_options['time']['start'] : date('m/d/y h:i a', $random_timestamp),
+  		  'end' => (isset($default_options['time']['end'])) ? $default_options['time']['end'] : date('m/d/y h:i a', $random_timestamp + 3600),
   	  ),
   	  'prerequisites' => (isset($default_options['prerequisites'])) ? $default_options['prerequisites'] : $this->generateString(),
   	  'location' => array(
