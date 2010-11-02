@@ -7,8 +7,8 @@
 class CEERNResourceUtil {
 	
   private $ceen_location = 'http://localhost:8888/ceenapi/services/rest';
-  private $public_key = '9665857d322055b074a977fe44686d47';
-  private $private_key = '7352d97ef533d567e55c83f99b3c5cac';
+  private $public_key = '73de6e4829bc7e98f7678098adcd8d65';
+  private $private_key = 'b744def19242f792ee690ea791c37d67';
 	
 	function __construct(){
         
@@ -23,11 +23,6 @@ class CEERNResourceUtil {
     $hash = hash_hmac("sha256", implode(';', $hash_parameters), $this->private_key);
   
     $ch = curl_init();
-  
-    if ($output && $data) {
-      print "<br><b>Data Input</b>";
-      krumo($data);
-    }
   
     // if we're authenticating, we need to add info to the end of the query string. (i.e. - http://example.com/resource?test=1&[authinfo])
     if ($authenticate == TRUE) {
@@ -78,7 +73,14 @@ class CEERNResourceUtil {
     curl_close($ch);
     
     if ($output == TRUE) {
-      print "<br><b>Data Call</b> - ".$method."  ".$resource_name." -- ".$url;
+      print "<h2>Data Call - " . $method . ' ' . $url . "<h2>";
+      
+      if ($data) {
+        print "<h3>Input</h3>";
+        krumo($data);
+      }
+      
+      print "<h3>Return Data</h3>";
       krumo($return);
     }
   
